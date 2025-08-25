@@ -591,6 +591,7 @@ Value* env_get(Environment* env, const char* name){
 }
 
 // ------- value helpers ---------
+
 Value make_num(int v) {
 	return (Value) {
 		VAL_NUM, .numValue = v
@@ -619,6 +620,7 @@ Value make_func(ASTNode* func, Environment* env) {
 }
 
 // ------- forward declarations --------
+
 typedef struct Parser {
 	TokenArray* tokens;
 	size_t current;
@@ -669,10 +671,8 @@ void consume(Parser* p, TokenType t, const char* msg) {
 }
 
 // ------- parser -------
+
 ASTNode* parse_primary(Parser* p) {
-	if (check(p, TOKEN_FUNCTION)) {
-		return parse_function(p);
-	}
 	if (check(p, TOKEN_NUMBER)) {
 		Token* t = advance(p);
 		ASTNode* node = malloc(sizeof(ASTNode));
@@ -699,18 +699,17 @@ ASTNode* parse_primary(Parser* p) {
 	if (check(p, TOKEN_LPAREN)) {
 		advance(p);
 		ASTNode* expr = parse_expression(p);
-		consume(p, TOKEN_RPAREN, "expected closing )");
+		consume(p, TOKEN_RPAREN, "Expected closing )");
 		return expr;
 	}
 	Token* t = peek(p);
-	fprintf(stderr, "unexpected token in primary: type %d", t ? (int)t->type : -1);
+	fprintf(stderr, "Unexpected token in primary: type %d", t ? (int)t->type : -1);
 	if(t && (t->type == TOKEN_IDENTIFIER || t->type == TOKEN_BOOLEAN)) {
 		fprintf(stderr, " ('%s')", t->stringValue);
 	}
 	fprintf(stderr, "\n");
 	exit(EXIT_FAILURE);
 }
-
 
 ASTNode* parse_unary(Parser* p) {
 	if(match(p, TOKEN_NOT)) {
@@ -968,6 +967,7 @@ ASTNode* parse_program(Parser* p) {
 }
 
 // ------- interpreter -------
+
 Environment* create_child_env(Environment* parent) {
 	return create_env(parent);
 }
