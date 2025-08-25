@@ -7,7 +7,7 @@ A minimalist programming language interpreter written in C, featuring lexical an
 ## Features
 
 - Lexical tokenizer supporting keywords, identifiers, literals, operators, and symbols.
-- Recursive-descent parser producing an Abstract Syntax Tree (AST).
+- Recursive descent parser producing an Abstract Syntax Tree (AST).
 - Environment model with variable scoping and constants.
 - Primitive data types: numbers and booleans.
 - Functions.
