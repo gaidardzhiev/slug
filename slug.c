@@ -1000,7 +1000,8 @@ Value interpret(ASTNode* node, Environment* env) {
 	}
 	case AST_ASSIGN: {
 		Value val = interpret(node->assignNode.expr, env);
-		if(!env_assign(env, node->assignNode.identifier->identifier.name, val))                     panicf("assign to undefined variable %s", node->assignNode.identifier->identifier.name);
+		if(!env_assign(env, node->assignNode.identifier->identifier.name, val))
+			panicf("assign to undefined variable %s", node->assignNode.identifier->identifier.name);
 		return val;
 	}
 	case AST_BINOP: {
