@@ -10,8 +10,7 @@ void panic(const char* msg) {
 	exit(EXIT_FAILURE);
 }
 
-void panicf(const char* fmt, ...)
-{
+void panicf(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
 	fprintf(stderr,"runtime error: ");
@@ -571,8 +570,7 @@ void env_define(Environment* env, const char* name, Value val, bool constant) {
 	}
 }
 
-bool env_assign(Environment* env, const char* name, Value val)
-{
+bool env_assign(Environment* env, const char* name, Value val){
 	struct EnvEntry* e = env_find(env, name);
 	if(e) {
 		if(e->constant) {
@@ -586,8 +584,7 @@ bool env_assign(Environment* env, const char* name, Value val)
 	return false;
 }
 
-Value* env_get(Environment* env, const char* name)
-{
+Value* env_get(Environment* env, const char* name){
 	struct EnvEntry* e = env_find(env, name);
 	if(e) return &e->value;
 	return NULL;
@@ -798,21 +795,17 @@ ASTNode* parse_binop_rhs(Parser* p, int expr_prec, ASTNode* lhs) {
 	while(true) {
 		Token* t = peek(p);
 		int tok_prec = get_precedence(t->type);
-
 		if(tok_prec < expr_prec)
 			return lhs;
-
 		TokenType op = t->type;
 		advance(p);
 
 		ASTNode* rhs = parse_unary(p);
 		Token* next = peek(p);
 		int next_prec = get_precedence(next->type);
-
 		if(tok_prec < next_prec) {
 			rhs = parse_binop_rhs(p, tok_prec+1, rhs);
 		}
-
 		ASTNode* new_lhs = malloc(sizeof(ASTNode));
 		new_lhs->type = AST_BINOP;
 		new_lhs->binOpNode.op = token_to_binop(op);
@@ -831,7 +824,6 @@ ASTNode* parse_function(Parser* p) {
 	consume(p, TOKEN_LPAREN, "expected '(' after func");
 	ASTNode** params = NULL;
 	size_t paramCount = 0;
-
 	if(!check(p, TOKEN_RPAREN)) {
 		do {
 			Token* t = peek(p);
@@ -856,7 +848,6 @@ ASTNode* parse_function(Parser* p) {
 	node->functionDecNode.params = params;
 	node->functionDecNode.paramCount = paramCount;
 	node->functionDecNode.expr = body;
-
 	return node;
 }
 
@@ -895,9 +886,9 @@ ASTNode* parse_statement(Parser* p) {
 		idNode->identifier.name = strdup(id->stringValue);
 		idNode->identifier.constant = constant;
 		advance(p);
-		consume(p, TOKEN_EQUAL, "Expected '=' after identifier");
+		consume(p, TOKEN_EQUAL, "expected '=' after identifier");
 		ASTNode* expr = parse_expression(p);
-		consume(p, TOKEN_SEMICOLON, "Expected ';' after variable assignment");
+		consume(p, TOKEN_SEMICOLON, "expected ';' after variable assignment");
 
 		ASTNode* node = malloc(sizeof(ASTNode));
 		node->type = AST_LET;
@@ -914,10 +905,10 @@ ASTNode* parse_statement(Parser* p) {
 			idNode->type = AST_IDENTIFIER;
 			idNode->identifier.name = strdup(id->stringValue);
 			idNode->identifier.constant = false;
-			advance(p); // identifier
-			advance(p); // '='
+			advance(p);
+			advance(p);
 			ASTNode* expr = parse_expression(p);
-			consume(p, TOKEN_SEMICOLON, "Expected ; after assignment");
+			consume(p, TOKEN_SEMICOLON, "expected ; after assignment");
 			ASTNode* node = malloc(sizeof(ASTNode));
 			node->type = AST_ASSIGN;
 			node->assignNode.identifier = idNode;
@@ -931,10 +922,10 @@ ASTNode* parse_statement(Parser* p) {
 	}
 
 	if(match(p, TOKEN_OUTNUMBER)) {
-		consume(p, TOKEN_LPAREN, "Expected '(' after outn");
+		consume(p, TOKEN_LPAREN, "expected '(' after outn");
 		ASTNode* arg = parse_expression(p);
-		consume(p, TOKEN_RPAREN, "Expected ')' after outn argument");
-		consume(p, TOKEN_SEMICOLON, "Expected ';' after outn statement");
+		consume(p, TOKEN_RPAREN, "expected ')' after outn argument");
+		consume(p, TOKEN_SEMICOLON, "expected ';' after outn statement");
 
 		ASTNode** params = malloc(sizeof(ASTNode*));
 		params[0] = arg;
@@ -1115,7 +1106,7 @@ Value interpret(ASTNode* node, Environment* env) {
 			}
 			return make_bool(true);
 		}
-		panic("Unknown builtin");
+		panic("unknown builtin");
 	}
 	default:
 		panic("not implemented AST node interpretation");
@@ -1126,7 +1117,7 @@ Value interpret(ASTNode* node, Environment* env) {
 // ------- main ----------
 int main(int argc, char** argv) {
 	if(argc != 2) {
-		printf("Usage: ./slug <script>\n");
+		printf("usage: ./slug <script.slg>\n");
 		return 1;
 	}
 	FILE* f = fopen(argv[1], "r");
