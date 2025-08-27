@@ -1,0 +1,4 @@
+let source = "let source = %c%s%c;\nout(source);\nout(\"\\n\");\nout(source);\n";
+out(source);
+out("\n");
+out(source);
