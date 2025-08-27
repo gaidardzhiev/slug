@@ -276,3 +276,9 @@ Slug is a fully featured interpreted language with all fundamental capabilities 
 The advanced recursion and higher order function examples prove its ability to express any computable function, fulfilling the definition of Turing completeness.
 
 ---
+
+## License
+
+This project is provided under the GPL3 License.
+
+---
