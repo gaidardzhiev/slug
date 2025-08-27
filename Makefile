@@ -1,4 +1,4 @@
-CC=musl-gcc
+CC:=$(shell command -v musl-gcc 2>/dev/null || command -v gcc 2>/dev/null || command -v cc 2>/dev/null)
 BIN=slug
 
 all: $(BIN)
