@@ -1,7 +1,4 @@
-CC:=$(shell command -v musl-gcc 2>/dev/null || \
-            command -v gcc 2>/dev/null || \
-	    command -v tcc 2>/dev/null || \
-	    command -v clang 2>/dev/null)
+CC:=$(shell command -v musl-gcc 2>/dev/null || command -v gcc 2>/dev/null || command -v tcc 2>/dev/null || command -v clang 2>/dev/null)
 BIN=slug
 
 ifeq ($(strip $(CC)),)
