@@ -195,7 +195,7 @@ outn(result);
 
 ---
 
-### Loop Control without `break` (`unbounded_loop.slg`)
+### Loop Control without `break` (`scripts/unbounded_loop.slg`)
 ```
 let i = 0;
 let done = false;
