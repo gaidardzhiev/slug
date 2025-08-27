@@ -1,6 +1,10 @@
 # SLUG
 
-A minimalist programming language interpreter written in C, featuring lexical analysis (tokenizer), parsing (parser), environment management, and interpretation of expressions and statements including control flow and functions.
+Slug is a minimalist, interpreted programming language written in C. It features a lexical analyzer, parser, environment management, and an interpreter capable of evaluating expressions and statements including control flow, functions, and recursion.
+
+Designed to be simple yet powerful, Slug supports higher-order functions, closures, conditionals, and looping constructs. Through examples such as the factorial function, the deeply recursive Ackermann function, and advanced recursion patterns, Slug demonstrates its ability to express any computable function and is therefore *Turing complete*.
+
+Slug is suitable for exploring language interpreter design, functional programming concepts, and computational theory in a compact and clear environment.
 
 ---
 
