@@ -4,6 +4,8 @@ G='\033[0;32m'
 R='\033[0;31m'
 N='\033[0m'
 
+[ ! -f slug ] && make
+
 fprint() {
 	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
 }
