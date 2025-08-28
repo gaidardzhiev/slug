@@ -14,7 +14,7 @@ test_ackermann() {
 		fprint "Ackermann(3,7)" "${G}PASSED${N}";
 		return 0;
 	} || {
-		fprint "Ackermann(3,7)" "FAILED";
+		fprint "Ackermann(3,7)" "${R}FAILED${N}";
 		return 2;
 	}
 }
@@ -22,10 +22,10 @@ test_ackermann() {
 test_increment() {
 	capture=$(./slug scripts/anon_func.slg)
 	[ "$capture" = "8" ] && {
-		fprint "Increment" "PASSED";
+		fprint "Increment" "${G}PASSED${N}";
 		return 0;
 	} || {
-		fprint "Increment" "FAILED";
+		fprint "Increment" "${R}FAILED${N}";
 		return 3;
 	}
 }
