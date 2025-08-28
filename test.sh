@@ -39,6 +39,17 @@ test_core_lang() {
 	}
 }
 
-{ test_ackermann && test_increment && test_core_lang; return="$?"; } || exit 1
+test_turing() {
+	capture=$(./slug scripts/turing.slg)
+	[ "$capture" = "120" ] && {
+		fprint "Turing Test" "PASSED";
+		return 0;
+	} || {
+		fprint "Turing Test" "FAILED";
+		return 5;
+	}
+}
+
+{ test_ackermann && test_increment && test_core_lang && test_turing; return="$?"; } || exit 1
 
 [ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
