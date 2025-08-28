@@ -1,13 +1,17 @@
 #!/bin/sh
 
+G='\033[0;32m'
+R='\033[0;31m'
+N='\033[0m'
+
 fprint() {
-	 printf "[%s] Test: %-20s Result: %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
+	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
 }
 
 test_ackermann() {
 	capture=$(./slug scripts/ackermann.slg)
 	[ "$capture" = "1021" ] && {
-		fprint "Ackermann(3,7)" "PASSED";
+		fprint "Ackermann(3,7)" "${G}PASSED${N}";
 		return 0;
 	} || {
 		fprint "Ackermann(3,7)" "FAILED";
@@ -42,14 +46,25 @@ test_core_lang() {
 test_turing() {
 	capture=$(./slug scripts/turing.slg)
 	[ "$capture" = "120" ] && {
-		fprint "Turing Test" "PASSED";
+		fprint "Turing Completeness" "PASSED";
 		return 0;
 	} || {
-		fprint "Turing Test" "FAILED";
+		fprint "Turing Completeness" "FAILED";
 		return 5;
 	}
 }
 
-{ test_ackermann && test_increment && test_core_lang && test_turing; return="$?"; } || exit 1
+test_hof() {
+	capture=$(./slug scripts/higher_order_functions_and_closures.slg)
+	[ "$capture" = "25" ] && {
+		fprint "Higher Order" "PASSED";
+		return 0;
+	} || {
+		fprint "Higher Order" "FAILED";
+		return 6;
+	}
+}
+
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof; return="$?"; } || exit 1
 
 [ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
