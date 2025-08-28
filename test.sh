@@ -35,10 +35,10 @@ test_core_lang() {
 	expected=$(printf '%b' "$expected")
 	capture=$(./slug scripts/core_language_test.slg)
 	[ "$capture" = "$expected" ] && {
-		fprint "Core Language" "PASSED";
+		fprint "Core Language" "${G}PASSED${N}";
 		return 0;
 	} || {
-		fprint "Core Language" "FAILED";
+		fprint "Core Language" "${R}FAILED${N}";
 		return 4;
 	}
 }
@@ -46,10 +46,10 @@ test_core_lang() {
 test_turing() {
 	capture=$(./slug scripts/turing.slg)
 	[ "$capture" = "120" ] && {
-		fprint "Turing Completeness" "PASSED";
+		fprint "Turing Completeness" "${G}PASSED${N}";
 		return 0;
 	} || {
-		fprint "Turing Completeness" "FAILED";
+		fprint "Turing Completeness" "${R}FAILED${N}";
 		return 5;
 	}
 }
@@ -57,10 +57,10 @@ test_turing() {
 test_hof() {
 	capture=$(./slug scripts/higher_order_functions_and_closures.slg)
 	[ "$capture" = "25" ] && {
-		fprint "Higher Order" "PASSED";
+		fprint "Higher Order" "${G}PASSED${N}";
 		return 0;
 	} || {
-		fprint "Higher Order" "FAILED";
+		fprint "Higher Order" "${R}FAILED${N}";
 		return 6;
 	}
 }
