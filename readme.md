@@ -307,7 +307,7 @@ outn(de_morgan_1(false, false));
 
 ---
 
-### Gödel Halting Paradox Script (`scripts/godel_halt_paradox.slg`)
+### Halting Paradox Script (`scripts/halting_paradox.slg`)
 ```
 let halts = func(prog, input) => {
     false;
@@ -334,28 +334,6 @@ outn(result);
 - Sets up `paradox` to apply `diagonal` to a halting oracle itself.
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
-<!---Mathematically, this paradox corresponds to the fixed-point equation:
-
-$$
-D = \begin{cases}
-\text{loop forever}, & \text{if } H(D, D) = \top \\
-0, & \text{if } H(D, D) = \bot
-\end{cases}
-$$
-
-where \( H \) is the hypothetical halting oracle, \( D \) is the diagonal function, \( \top \) denotes true, and \( \bot \) denotes false.
-
-This expresses that \( D \) loops if the halting oracle predicts it halts, and halts otherwise — a contradiction proving no universal halting oracle exists.-->
-
-Mathematically, the paradox corresponds to the fixed-point function:
-
-\( D = \)
-- loops forever if \( H(D, D) = \top \)
-- halts with 0 if \( H(D, D) = \bot \)
-
-where \( H \) is the halting oracle, \( D \) the diagonal function, \( \top \) true, and \( \bot \) false.
-
-This expresses a contradiction proving no universal halting oracle can exist.
 
 ## Proof of Turing Completeness
 
