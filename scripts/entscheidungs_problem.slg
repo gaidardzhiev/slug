@@ -1,8 +1,8 @@
-let halts = func(machine, input) => {
+var halts = func(machine, input) => {
     false;
 };
 
-let diagonal = func(f) => {
+var diagonal = func(f) => {
     if (halts(f, f)) {
         diagonal(f);
     } else {
@@ -10,7 +10,7 @@ let diagonal = func(f) => {
     }
 };
 
-let decider = func(machine) => {
+var decider = func(machine) => {
     if (halts(machine, 0)) {
         1;
     } else {
@@ -18,6 +18,6 @@ let decider = func(machine) => {
     }
 };
 
-let paradox = diagonal(decider);
+var paradox = diagonal(decider);
 
 outn(paradox);

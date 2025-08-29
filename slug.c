@@ -127,7 +127,7 @@ static void tokenize(const char* src, TokVec* out) {
 			memcpy(id, src+s, len);
 			id[len]='\0';
 			Tok t = T_ID;
-			if(strcmp(id,"let")==0) {
+			if(strcmp(id,"var")==0) {
 				t=T_LET;
 			} else if(strcmp(id,"const")==0) {
 				t=T_CONST;
@@ -421,7 +421,7 @@ struct AST {
 		IdNode id;
 		int num;
 		bool boolean;
-		LetNode let_;
+		LetNode var_;
 		AssignNode asn;
 		BinNode bin;
 		UnNode un;
@@ -719,15 +719,15 @@ static AST* parse_while(Parser* p) {
 static AST* parse_stmt(Parser* p) {
 	if(P_is(p,T_LET) || P_is(p,T_CONST)) {
 		bool isConst = p->toks->data[p->i-1].t==T_CONST;
-		if(!P_check(p,T_ID)) die("expected identifier after let/const");
+		if(!P_check(p,T_ID)) die("expected identifier after var/const");
 		Token* id=P_adv(p);
 		P_consume(p,T_EQ,"expected '=' after identifier");
 		AST* expr=parse_expr(p);
 		P_consume(p,T_SEMI,"expected ';' after declaration");
 		AST a= {.tag=A_LET};
-		a.let_.id = mk_id(id->sval,isConst);
-		a.let_.expr = expr;
-		a.let_.constant = isConst;
+		a.var_.id = mk_id(id->sval,isConst);
+		a.var_.expr = expr;
+		a.var_.constant = isConst;
 		return mk(a);
 	}
 	if(P_check(p,T_ID) && p->toks->data[p->i+1].t==T_EQ) {
@@ -927,8 +927,8 @@ static Val eval(AST* a, Env* env) {
 		return en->val;
 	}
 	case A_LET: {
-		Val v = eval(a->let_.expr, env);
-		env_define(env, a->let_.id->id.name, v, a->let_.constant);
+		Val v = eval(a->var_.expr, env);
+		env_define(env, a->var_.id->id.name, v, a->var_.constant);
 		return v;
 	}
 	case A_ASSIGN: {

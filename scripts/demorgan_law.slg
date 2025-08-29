@@ -1,11 +1,11 @@
-let not = func(b) => {
+var not = func(b) => {
     if (b) { false; } else { true; }
 };
 
-let and = func(a, b) => { a && b; };
-let or = func(a, b) => { a || b; };
+var and = func(a, b) => { a && b; };
+var or = func(a, b) => { a || b; };
 
-let de_morgan_1 = func(a, b) => {
+var de_morgan_1 = func(a, b) => {
     not(and(a, b)) == or(not(a), not(b));
 };
 

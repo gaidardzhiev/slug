@@ -1,5 +1,5 @@
-let i = 0;
-let done = false;
+var i = 0;
+var done = false;
 while (!done) {
     i = i + 1;
     if (i == 10) {

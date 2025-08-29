@@ -1,4 +1,4 @@
-let ackermann = func(m, n) => {
+var ackermann = func(m, n) => {
     if (m == 0) {
         n + 1;
     } else {
@@ -10,5 +10,5 @@ let ackermann = func(m, n) => {
     }
 };
 
-let result = ackermann(3, 7);
+var result = ackermann(3, 7);
 outn(result);

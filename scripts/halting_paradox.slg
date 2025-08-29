@@ -1,8 +1,8 @@
-let halts = func(prog, input) => {
+var halts = func(prog, input) => {
     false;
 };
 
-let diagonal = func(f) => {
+var diagonal = func(f) => {
     if (halts(f, f)) {
         diagonal(f);
     } else {
@@ -10,10 +10,10 @@ let diagonal = func(f) => {
     }
 };
 
-let paradox = func(haltFunc) => {
+var paradox = func(haltFunc) => {
     diagonal(haltFunc);
 };
 
-let result = paradox(diagonal);
+var result = paradox(diagonal);
 
 outn(result);

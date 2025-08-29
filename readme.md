@@ -26,7 +26,7 @@ Slug is suitable for exploring language interpreter design, functional programmi
 
 The language supports:
 
-- Variable declarations with `let` and `const`.
+- Variable declarations with `var` and `const`.
 - Arithmetic operators (`+`, `-`, `*`, `/`, `%`).
 - Comparison and equality operators (`<`, `<=`, `>`, `>=`, `==`, `!=`).
 - Logical operators (`&&`, `||`, `!`).
@@ -52,7 +52,7 @@ Implements recursive descent to produce an AST representing the program structur
 Enumerates node types and expresses program structure:
 - Literals (number, boolean)
 - Identifiers
-- Variable declarations (`let`, `const`)
+- Variable declarations (`var`, `const`)
 - Assignments
 - Binary and unary operations
 - Blocks (`{ ... }`)
@@ -94,9 +94,9 @@ This document describes several scripts and core language features of the Slug i
 ### Arithmetic, Variables, and Conditionals (`scripts/core_language_test.slg`)
 ```
 {
-    let a = 10;
+    var a = 10;
     const b = 5;
-    let c = a + b * 2;
+    var c = a + b * 2;
     outn(c);
 
     if (c > 15) {
@@ -107,35 +107,35 @@ This document describes several scripts and core language features of the Slug i
         outn(3);
     }
 
-    let count = 0;
+    var count = 0;
     while (count < 5) {
         outn(count);
         count = count + 1;
     }
 
-    let multiply = func (x, y) => {
+    var multiply = func (x, y) => {
         x * y;
     };
 
-    let result = multiply(4, 5);
+    var result = multiply(4, 5);
     outn(result);
 
-    let outer = func (x) => {
+    var outer = func (x) => {
         func (y) => {
             x + y;
         };
     };
-    let add5 = outer(5);
+    var add5 = outer(5);
     outn(add5(10));
 
-    let val = true && false || true;
+    var val = true && false || true;
     if (val == true) {
         outn(42);
     }
 }
 ```
 
-- Supports variables (mutable `let` and immutable `const`).
+- Supports variables (mutable `var` and immutable `const`).
 - Arithmetic operations and operator precedence.
 - Conditional `if`, `elif`, and `else` blocks.
 - Loops using `while`.
@@ -146,7 +146,7 @@ This document describes several scripts and core language features of the Slug i
 
 ### Simple Recursion (`scripts/turing.slg`)
 ```
-let factorial = func(n) => {
+var factorial = func(n) => {
     if (n == 0) {
         1;
     } else {
@@ -154,7 +154,7 @@ let factorial = func(n) => {
     }
 };
 
-let result = factorial(5);
+var result = factorial(5);
 outn(result);
 ```
 - Demonstrates recursion and function calls.
@@ -164,7 +164,7 @@ outn(result);
 
 ### Anonymous Functions (`scripts/anon_func.slg`)
 ```
-let increment = func(x) => { x + 1; };
+var increment = func(x) => { x + 1; };
 outn(increment(7));
 ```
 - Supports anonymous functions (lambdas).
@@ -174,7 +174,7 @@ outn(increment(7));
 
 ### Advanced Recursion: Ackermann Function (`scripts/ackermann.slg`)
 ```
-let ackermann = func(m, n) => {
+var ackermann = func(m, n) => {
     if (m == 0) {
         n + 1;
     } else {
@@ -186,7 +186,7 @@ let ackermann = func(m, n) => {
     }
 };
 
-let result = ackermann(3, 7);
+var result = ackermann(3, 7);
 outn(result);
 ```
 - A classic computationally intensive recursive function.
@@ -197,8 +197,8 @@ outn(result);
 
 ### Loop Control without `break` (`scripts/unbounded_loop.slg`)
 ```
-let i = 0;
-let done = false;
+var i = 0;
+var done = false;
 while (!done) {
     i = i + 1;
     if (i == 10) {
@@ -214,11 +214,11 @@ while (!done) {
 
 ### Higher Order Functions and Closures (`scripts/higher_order_functions_and_closures.slg`)
 ```
-let apply = func(f, x) => {
+var apply = func(f, x) => {
     f(x);
 };
 
-let square = func(n) => {
+var square = func(n) => {
     n * n;
 };
 
@@ -231,7 +231,7 @@ outn(apply(square, 5));
 
 ### Tail Recursive Function (`scripts/recursion.slg`)
 ```
-let fact = func(n, acc) => {
+var fact = func(n, acc) => {
     if (n == 0) {
         acc;
     } else {
@@ -248,28 +248,28 @@ outn(fact(5, 1));
 
 ### Truth Table Testing Script (`scripts/truth_table_testing.slg`)
 ```
-let not = func(b) => {
+var not = func(b) => {
         if (b) { false; } else { true; }
 };
 
-let and = func(a, b) => a && b;
-let or = func(a, b) => a || b;
+var and = func(a, b) => a && b;
+var or = func(a, b) => a || b;
 
-let get_bit = func(num, bit) => {
+var get_bit = func(num, bit) => {
         if ((num / bit) % 2 == 0) { false; } else { true; }
 };
 
-let truth_table = func(f) => {
-        let i = 0;
+var truth_table = func(f) => {
+        var i = 0;
         while (i < 4) {
-                let a = get_bit(i, 2);
-                let b = get_bit(i, 1);
+                var a = get_bit(i, 2);
+                var b = get_bit(i, 1);
                 outn(f(a, b));
                 i = i + 1;
         }
 };
 
-let de_morgan_1 = func(a, b) => {
+var de_morgan_1 = func(a, b) => {
         not(and(a, b)) == or(not(a), not(b));
 };
 
@@ -284,14 +284,14 @@ truth_table(de_morgan_1);
 
 ### De Morgan's Law Script (`scripts/demorgan_law.slg`)
 ```
-let not = func(b) => {
+var not = func(b) => {
     if (b) { false; } else { true; }
 };
 
-let and = func(a, b) => { a && b; };
-let or = func(a, b) => { a || b; };
+var and = func(a, b) => { a && b; };
+var or = func(a, b) => { a || b; };
 
-let de_morgan_1 = func(a, b) => {
+var de_morgan_1 = func(a, b) => {
     not(and(a, b)) == or(not(a), not(b));
 };
 
@@ -309,11 +309,11 @@ outn(de_morgan_1(false, false));
 
 ### Halting Paradox Script (`scripts/halting_paradox.slg`)
 ```
-let halts = func(prog, input) => {
+var halts = func(prog, input) => {
     false;
 };
 
-let diagonal = func(f) => {
+var diagonal = func(f) => {
     if (halts(f, f)) {
         diagonal(f);
     } else {
@@ -321,11 +321,11 @@ let diagonal = func(f) => {
     }
 };
 
-let paradox = func(haltFunc) => {
+var paradox = func(haltFunc) => {
     diagonal(haltFunc);
 };
 
-let result = paradox(diagonal);
+var result = paradox(diagonal);
 
 outn(result);
 ```

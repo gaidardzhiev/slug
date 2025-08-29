@@ -1,4 +1,4 @@
-let factorial = func(n) => {
+var factorial = func(n) => {
     if (n == 0) {
         1;
     } else {
@@ -6,5 +6,5 @@ let factorial = func(n) => {
     }
 };
 
-let result = factorial(5);
+var result = factorial(5);
 outn(result);

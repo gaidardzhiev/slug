@@ -1,8 +1,8 @@
-let apply = func(f, x) => {
+var apply = func(f, x) => {
     f(x);
 };
 
-let square = func(n) => {
+var square = func(n) => {
     n * n;
 };
 
