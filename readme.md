@@ -241,10 +241,99 @@ let fact = func(n, acc) => {
 
 outn(fact(5, 1));
 ```
-- Shows support for tail-recursion style functions with parameters as accumulators.
+- Shows support for tail recursion style functions with parameters as accumulators.
 - Demonstrates ability to write efficient recursive code patterns.
 
 ---
+
+### Truth Table Testing Script (`scripts/truth_table_testing.slg`)
+```
+let not = func(b) => {
+        if (b) { false; } else { true; }
+};
+
+let and = func(a, b) => a && b;
+let or = func(a, b) => a || b;
+
+let get_bit = func(num, bit) => {
+        if ((num / bit) % 2 == 0) { false; } else { true; }
+};
+
+let truth_table = func(f) => {
+        let i = 0;
+        while (i < 4) {
+                let a = get_bit(i, 2);
+                let b = get_bit(i, 1);
+                outn(f(a, b));
+                i = i + 1;
+        }
+};
+
+let de_morgan_1 = func(a, b) => {
+        not(and(a, b)) == or(not(a), not(b));
+};
+
+truth_table(de_morgan_1);
+```
+- Defines basic boolean logic functions `not`, `and`, `or`.
+- Programmatically generates all possible Boolean input pairs using `get_bit`.
+- Automates truth table testing with the `truth_table` function by evaluating `f` over all input pairs.
+- Tests De Morgan's Law, outputting `true` or `false` for each case.
+
+---
+
+### De Morgan's Law Script (`scripts/demorgan_law.slg`)
+```
+let not = func(b) => {
+    if (b) { false; } else { true; }
+};
+
+let and = func(a, b) => { a && b; };
+let or = func(a, b) => { a || b; };
+
+let de_morgan_1 = func(a, b) => {
+    not(and(a, b)) == or(not(a), not(b));
+};
+
+outn(de_morgan_1(true, true));
+outn(de_morgan_1(true, false));
+outn(de_morgan_1(false, true));
+outn(de_morgan_1(false, false));
+```
+- Implements the boolean negation, AND, and OR functions.
+- Defines the De Morgan equivalence function `de_morgan_1`.
+- Outputs the result of the equivalence on all possible two boolean inputs manually.
+- Demonstrates the fundamental logic identity holds for every input.
+
+---
+
+### Gödel Halting Paradox Script (`scripts/godel_halt_paradox.slg`)
+```
+let halts = func(prog, input) => {
+    false;
+};
+
+let diagonal = func(f) => {
+    if (halts(f, f)) {
+        diagonal(f);
+    } else {
+        0;
+    }
+};
+
+let paradox = func(haltFunc) => {
+    diagonal(haltFunc);
+};
+
+let result = paradox(diagonal);
+
+outn(result);
+```
+- Defines a false halting oracle `halts` always returning `false`.
+- Defines `diagonal` applying oracle to function applied to itself, recursing infinitely if halting predicted.
+- Sets up `paradox` to apply `diagonal` to a halting oracle itself.
+- Outputs `0`, illustrating the contradiction proving halting problem undecidable.
+
 
 ## Proof of Turing Completeness
 
