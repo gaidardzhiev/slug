@@ -1,0 +1,23 @@
+let halts = func(machine, input) => {
+    false;
+};
+
+let diagonal = func(f) => {
+    if (halts(f, f)) {
+        diagonal(f);
+    } else {
+        0;
+    }
+};
+
+let decider = func(machine) => {
+    if (halts(machine, 0)) {
+        1;
+    } else {
+        0;
+    }
+};
+
+let paradox = diagonal(decider);
+
+outn(paradox);
