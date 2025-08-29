@@ -347,6 +347,15 @@ where \( H \) is the hypothetical halting oracle, \( D \) is the diagonal functi
 
 This expresses that \( D \) loops if the halting oracle predicts it halts, and halts otherwise — a contradiction proving no universal halting oracle exists.-->
 
+Mathematically, the paradox corresponds to the fixed-point function:
+
+\( D = \)
+- loops forever if \( H(D, D) = \top \)
+- halts with 0 if \( H(D, D) = \bot \)
+
+where \( H \) is the halting oracle, \( D \) the diagonal function, \( \top \) true, and \( \bot \) false.
+
+This expresses a contradiction proving no universal halting oracle can exist.
 
 ## Proof of Turing Completeness
 
