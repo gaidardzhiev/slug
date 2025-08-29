@@ -334,7 +334,7 @@ outn(result);
 - Sets up `paradox` to apply `diagonal` to a halting oracle itself.
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
-Mathematically, this paradox corresponds to the fixed-point equation:
+<!---Mathematically, this paradox corresponds to the fixed-point equation:
 
 $$
 D = \begin{cases}
@@ -345,7 +345,7 @@ $$
 
 where \( H \) is the hypothetical halting oracle, \( D \) is the diagonal function, \( \top \) denotes true, and \( \bot \) denotes false.
 
-This expresses that \( D \) loops if the halting oracle predicts it halts, and halts otherwise — a contradiction proving no universal halting oracle exists.
+This expresses that \( D \) loops if the halting oracle predicts it halts, and halts otherwise — a contradiction proving no universal halting oracle exists.-->
 
 
 ## Proof of Turing Completeness
