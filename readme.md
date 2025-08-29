@@ -333,16 +333,20 @@ outn(result);
 - Defines `diagonal` applying oracle to function applied to itself, recursing infinitely if halting predicted.
 - Sets up `paradox` to apply `diagonal` to a halting oracle itself.
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
-- Mathematically, this paradox corresponds to the fixed-point equation:
 
-\[
-D = \begin{cases} 
-\text{loop forever} & \text{if } H(D, D) = \text{true} \\
-\text{halt with } 0 & \text{if } H(D, D) = \text{false}
+Mathematically, this paradox corresponds to the fixed-point equation:
+
+$$
+D = \begin{cases}
+\text{loop forever}, & \text{if } H(D, D) = \top \\
+0, & \text{if } H(D, D) = \bot
 \end{cases}
-\]
+$$
 
-where \(H\) is the hypothetical halting oracle. This leads to contradiction since the behavior of \(D\) conflicts with \(H\)'s prediction, proving no such universal \(H\) can exist.
+where \( H \) is the hypothetical halting oracle, \( D \) is the diagonal function, \( \top \) denotes true, and \( \bot \) denotes false.
+
+This expresses that \( D \) loops if the halting oracle predicts it halts, and halts otherwise — a contradiction proving no universal halting oracle exists.
+
 
 ## Proof of Turing Completeness
 
