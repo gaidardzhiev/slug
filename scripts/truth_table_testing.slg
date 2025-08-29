@@ -1,0 +1,26 @@
+let not = func(b) => {
+	if (b) { false; } else { true; }
+};
+
+let and = func(a, b) => a && b;
+let or = func(a, b) => a || b;
+
+let get_bit = func(num, bit) => {
+	if ((num / bit) % 2 == 0) { false; } else { true; }
+};
+
+let truth_table = func(f) => {
+	let i = 0;
+	while (i < 4) {
+		let a = get_bit(i, 2);
+		let b = get_bit(i, 1);
+		outn(f(a, b));
+		i = i + 1;
+	}
+};
+
+let de_morgan_1 = func(a, b) => {
+	not(and(a, b)) == or(not(a), not(b));
+};
+
+truth_table(de_morgan_1);
