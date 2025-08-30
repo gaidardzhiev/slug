@@ -78,6 +78,19 @@ test_recursion() {
 	}
 }
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion; return="$?"; } || exit 1
+test_demorgan() {
+	expected="true\ntrue\ntrue\ntrue\n"
+	expected=$(printf %b "$expected")
+	capture=$(./slug scripts/demorgan_law.slg)
+	[ "$capture" = "$expected" ] && {
+		fprint "DeMorgan" "${G}PASSED${N}";
+		return 0;
+	} || { 
+		fprint "DeMorgan" "${R}FAILED${N}";
+		return 8;
+	}
+}
+
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan; return="$?"; } || exit 1
 
 [ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
