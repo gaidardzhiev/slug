@@ -91,6 +91,20 @@ test_demorgan() {
 	}
 }
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan; return="$?"; } || exit 1
+test_truth() {
+	expected="true\ntrue\ntrue\ntrue\n"
+	expected=$(printf %b "$expected")
+	capture=$(./slug scripts/truth_table_testing.slg)
+	[ "$capture" = "$expected" ] && {
+		fprint "Truth Table" "${G}PASSED${N}";
+		return 0;
+	} || {
+		fprint "Truth Table" "${R}FAILED${N}";
+		return 9;
+	}
+}
+
+
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth; return="$?"; } || exit 1
 
 [ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
