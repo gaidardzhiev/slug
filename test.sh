@@ -104,7 +104,18 @@ test_truth() {
 	}
 }
 
+test_recursion() {
+	capture=$(./slug scripts/recursion.slg)
+	[ "$capture" = "120" ] && {
+		fprint "Recursion" "${G}PASSED${N}";
+		return 0;
+	} || {
+		fprint "Recursion" "${R}FAILED${N}";
+		return 10;
+	}
+}
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth; return="$?"; } || exit 1
+
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth&& test_recursion; return="$?"; } || exit 1
 
 [ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
