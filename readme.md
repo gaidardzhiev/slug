@@ -246,7 +246,7 @@ outn(fact(5, 1));
 
 ---
 
-### Truth Table Testing Script (`scripts/truth_table_testing.slg`)
+### Truth Tables (`scripts/truth_table_testing.slg`)
 ```
 var not = func(b) => {
         if (b) { false; } else { true; }
@@ -282,7 +282,7 @@ truth_table(de_morgan_1);
 
 ---
 
-### De Morgan's Law Script (`scripts/demorgan_law.slg`)
+### De Morgan's Law (`scripts/demorgan_law.slg`)
 ```
 var not = func(b) => {
     if (b) { false; } else { true; }
@@ -307,7 +307,7 @@ outn(de_morgan_1(false, false));
 
 ---
 
-### Halting Paradox Script (`scripts/halting_paradox.slg`)
+### Halting Paradox (`scripts/halting_paradox.slg`)
 ```
 var halts = func(prog, input) => {
     false;
