@@ -10,7 +10,6 @@
 #include <ctype.h>
 #include <stdarg.h>
 
-// ---------- utility ----------
 static void die(const char* msg) {
 	fprintf(stderr, "runtime error: %s\n", msg);
 	exit(EXIT_FAILURE);
@@ -26,7 +25,6 @@ static void dief(const char* fmt, ...) {
 	exit(EXIT_FAILURE);
 }
 
-// ---------- tokens ----------
 typedef enum {
 	T_ID,
 	T_NUM,
@@ -325,7 +323,6 @@ static void tokenize(const char* src, TokVec* out) {
 	});
 }
 
-// ---------- AST ----------
 typedef struct AST AST;
 
 typedef enum {
@@ -470,7 +467,6 @@ static AST* mk_id(const char* s, bool c) {
 	return a;
 }
 
-// ---------- parser ----------
 typedef struct {
 	TokVec* toks;
 	size_t i;
@@ -790,7 +786,6 @@ static AST* parse_program(Parser* p) {
 	return mk(a);
 }
 
-// ---------- runtime ----------
 typedef enum {
 	V_NULL,
 	V_NUM,
@@ -1093,7 +1088,6 @@ static Val eval(AST* a, Env* env) {
 	return VNull();
 }
 
-// ---------- main ----------
 static char* fslurp(const char* path) {
 	FILE* f=fopen(path,"rb");
 	if(!f) return NULL;
