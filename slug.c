@@ -733,7 +733,7 @@ static AST* parse_stmt(Parser* p) {
 	}
 	if(P_check(p,T_ID) && p->toks->data[p->i+1].t==T_EQ) {
 		Token* id=P_adv(p);
-		P_adv(p); // '='
+		P_adv(p);
 		AST* expr=parse_expr(p);
 		P_consume(p,T_SEMI,"expected ';' after assignment");
 		AST a= {.tag=A_ASSIGN};
