@@ -106,7 +106,7 @@ test_truth() {
 
 test_recursion() {
 	capture=$(./slug scripts/recursion.slg)
-	[ "$capture" = "120" ] && {
+	[ "${capture}" = "120" ] && {
 		fprint "Recursion" "${G}PASSED${N}";
 		return 0;
 	} || {
