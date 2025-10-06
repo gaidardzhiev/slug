@@ -58,7 +58,7 @@ test_turing() {
 
 test_hof() {
 	capture=$(./slug scripts/higher_order_functions_and_closures.slg)
-	[ "$capture" = "25" ] && {
+	[ "${capture}" = "25" ] && {
 		fprint "Higher Order" "${G}PASSED${N}";
 		return 0;
 	} || {
@@ -69,7 +69,7 @@ test_hof() {
 
 test_recursion() {
 	capture=$(./slug scripts/recursion.slg)
-	[ "$capture" = "120" ] && {
+	[ "${capture}" = "120" ] && {
 		fprint "Recursion" "${G}PASSED${N}";
 		return 0;
 	} || { 
