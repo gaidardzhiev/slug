@@ -23,7 +23,7 @@ test_ackermann() {
 
 test_increment() {
 	capture=$(./slug scripts/anon_func.slg)
-	[ "$capture" = "8" ] && {
+	[ "${capture}" = "8" ] && {
 		fprint "Increment" "${G}PASSED${N}";
 		return 0;
 	} || {
