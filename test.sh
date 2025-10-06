@@ -128,7 +128,7 @@ test_entscheidungs() {
 
 test_halting() {
 	capture=$(./slug scripts/halting_paradox.slg)
-	[ "$capture" = "0" ] && {
+	[ "${capture}" = "0" ] && {
 		fprint "Halting Paradox" "${G}CONFIRMED${N}";
 		return 0;
 	} || {
@@ -138,6 +138,6 @@ test_halting() {
 }
 
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth&& test_recursion && test_entscheidungs && test_halting; return="$?"; } || exit 1
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth&& test_recursion && test_entscheidungs && test_halting; return="${?}"; } || exit 1
 
-[ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
+[ "${return}" -eq 0 ] 2>/dev/null || printf "%s\n" "${return}"
