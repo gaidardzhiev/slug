@@ -117,7 +117,7 @@ test_recursion() {
 
 test_entscheidungs() {
 	capture=$(./slug scripts/entscheidungs_problem.slg)
-	[ "$capture" = "0" ] && {
+	[ "${capture}" = "0" ] && {
 		fprint "EntscheidungsProblem" "${G}CONFIRMED${N}";
 		return 0;
 	} || {
