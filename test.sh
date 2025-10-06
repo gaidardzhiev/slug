@@ -80,9 +80,9 @@ test_recursion() {
 
 test_demorgan() {
 	expected="true\ntrue\ntrue\ntrue\n"
-	expected=$(printf %b "$expected")
+	expected=$(printf %b "${expected}")
 	capture=$(./slug scripts/demorgan_law.slg)
-	[ "$capture" = "$expected" ] && {
+	[ "${capture}" = "${expected}" ] && {
 		fprint "DeMorgan" "${G}PASSED${N}";
 		return 0;
 	} || { 
