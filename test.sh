@@ -93,9 +93,9 @@ test_demorgan() {
 
 test_truth() {
 	expected="true\ntrue\ntrue\ntrue\n"
-	expected=$(printf %b "$expected")
+	expected=$(printf %b "${expected}")
 	capture=$(./slug scripts/truth_table_testing.slg)
-	[ "$capture" = "$expected" ] && {
+	[ "${capture}" = "${expected}" ] && {
 		fprint "Truth Table" "${G}PASSED${N}";
 		return 0;
 	} || {
