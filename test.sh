@@ -12,7 +12,7 @@ fprint() {
 
 test_ackermann() {
 	capture=$(./slug scripts/ackermann.slg)
-	[ "$capture" = "1021" ] && {
+	[ "${capture}" = "1021" ] && {
 		fprint "Ackermann(3,7)" "${G}PASSED${N}";
 		return 0;
 	} || {
