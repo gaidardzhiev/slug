@@ -47,7 +47,7 @@ test_core_lang() {
 
 test_turing() {
 	capture=$(./slug scripts/turing.slg)
-	[ "$capture" = "120" ] && {
+	[ "${capture}" = "120" ] && {
 		fprint "Turing Completeness" "${G}PASSED${N}";
 		return 0;
 	} || {
