@@ -34,9 +34,9 @@ test_increment() {
 
 test_core_lang() {
 	expected="20\n1\n0\n1\n2\n3\n4\n20\n15\n42"
-	expected=$(printf '%b' "$expected")
+	expected=$(printf '%b' "${expected}")
 	capture=$(./slug scripts/core_language_test.slg)
-	[ "$capture" = "$expected" ] && {
+	[ "${capture}" = "${expected}" ] && {
 		fprint "Core Language" "${G}PASSED${N}";
 		return 0;
 	} || {
