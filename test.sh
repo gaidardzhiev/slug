@@ -7,7 +7,7 @@ N='\033[0m'
 [ ! -f slug ] && make
 
 fprint() {
-	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
+	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "${1}" "${2}"
 }
 
 test_ackermann() {
