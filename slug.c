@@ -1114,7 +1114,7 @@ int main(int argc, char** argv){
 	if(argc>=2) {
 		src = fslurp(argv[1]);
 		if(!src) {
-			fprintf(stderr,"could not read file: %s\n", argv[1]);
+			fprintf(stderr,"could not read script: %s\n", argv[1]);
 			return 1;
 		}
 	} else {
