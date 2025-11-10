@@ -6,7 +6,6 @@ Designed to be simple yet powerful, Slug supports higher order functions, closur
 
 Slug is suitable for exploring language interpreter design, functional programming concepts, and computational theory in a compact and clear environment.
 
----
 
 ## Features
 
@@ -20,7 +19,6 @@ Slug is suitable for exploring language interpreter design, functional programmi
 - Runtime error handling with descriptive messages.
 - Interpreter that evaluates the AST directly.
 
----
 
 ## Language Overview
 
@@ -35,7 +33,6 @@ The language supports:
 - Statements end with semicolons `;`.
 - Output via `outn(expression);`.
 
----
 
 ## Code Structure
 
@@ -81,13 +78,11 @@ Walks the AST to evaluate expressions and statements:
 
 Errors (e.g., undefined variables, type mismatches, division by zero) cause the interpreter to print a descriptive message and terminate.
 
----
 
 ## Slug Language: Features and Turing Completeness Proof
 
 This document describes several scripts and core language features of the Slug interpreted programming language, demonstrating its capabilities and proving it is Turing complete.
 
----
 
 ## Core Language Features
 
@@ -142,7 +137,6 @@ This document describes several scripts and core language features of the Slug i
 - Function declarations, including closures and nested functions.
 - Boolean logic operations.
 
----
 
 ### Simple Recursion (`scripts/turing.slg`)
 ```
@@ -160,7 +154,6 @@ outn(result);
 - Demonstrates recursion and function calls.
 - Computes factorial demonstrating non trivial mathematical functions.
 
----
 
 ### Anonymous Functions (`scripts/anon_func.slg`)
 ```
@@ -170,7 +163,6 @@ outn(increment(7));
 - Supports anonymous functions (lambdas).
 - Direct application of function values.
 
----
 
 ### Advanced Recursion: Ackermann Function (`scripts/ackermann.slg`)
 ```
@@ -193,7 +185,6 @@ outn(result);
 - Demonstrates deep recursion and complex control flow capabilities.
 - Running this successfully shows the language supports computations beyond simple loops.
 
----
 
 ### Loop Control without break (`scripts/unbounded_loop.slg`)
 ```
@@ -210,7 +201,6 @@ while (!done) {
 - Demonstrates looping and condition controlled termination without `break`.
 - Shows language handles boolean variables and `while` loops effectively.
 
----
 
 ### Higher Order Functions and Closures (`scripts/higher_order_functions_and_closures.slg`)
 ```
@@ -227,7 +217,6 @@ outn(apply(square, 5));
 - Supports functions as first class values.
 - Demonstrates passing functions as arguments and returning values.
 
----
 
 ### Tail Recursive Function (`scripts/recursion.slg`)
 ```
@@ -244,7 +233,6 @@ outn(fact(5, 1));
 - Shows support for tail recursion style functions with parameters as accumulators.
 - Demonstrates ability to write efficient recursive code patterns.
 
----
 
 ### Truth Tables (`scripts/truth_table_testing.slg`)
 ```
@@ -280,7 +268,6 @@ truth_table(de_morgan_1);
 - Automates truth table testing with the `truth_table` function by evaluating `f` over all input pairs.
 - Tests De Morgan's Law, outputting `true` or `false` for each case.
 
----
 
 ### De Morgan's Law (`scripts/demorgan_law.slg`)
 ```
@@ -305,7 +292,6 @@ outn(de_morgan_1(false, false));
 - Outputs the result of the equivalence on all possible two boolean inputs manually.
 - Demonstrates the fundamental logic identity holds for every input.
 
----
 
 ### Halting Paradox (`scripts/halting_paradox.slg`)
 ```
@@ -356,7 +342,6 @@ demonstrate the ability to compute any computable function given enough memory a
 
 These scripts prove Slug can simulate the core logic patterns of a Turing machine, thereby being **Turing complete**.
 
----
 
 ## Conclusion
 
@@ -369,5 +354,3 @@ The advanced recursion and higher order function examples prove its ability to e
 ## License
 
 This project is provided under the GPL3 License.
-
----
