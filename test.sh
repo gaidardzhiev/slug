@@ -1,4 +1,6 @@
 #!/bin/sh
+#Copyright (C) 2025 Ivan Gaydardzhiev
+#Licensed under the GPL-3.0-only
 
 G='\033[0;32m'
 R='\033[0;31m'
