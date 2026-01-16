@@ -320,7 +320,7 @@ outn(result);
 - Sets up `paradox` to apply `diagonal` to a halting oracle itself.
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
-## Halting Problem Diagonalization (`scripts/pure_diag.slg`)
+### Halting Problem Diagonalization (`scripts/pure_diag.slg`)
 
 ```
 var loops = func(f) => {
