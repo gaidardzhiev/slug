@@ -139,7 +139,20 @@ test_halting() {
 	}
 }
 
+test_purediag() {
+	exec 3>&2 2>/dev/null
+	./slug scripts/pure_diag.slg
+	capture="${?}"
+	exec 2>&3 3>&-
+	[ "${capture}" = "139" ] && {
+		fprint "Self Reference" "${G}CONFIRMED${N}";
+		return 0;
+	} || {
+		fprint "Self Reference" "${R}REFUTED${N}";
+		return 	13;
+	}
+}
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth&& test_recursion && test_entscheidungs && test_halting; return="${?}"; } || exit 1
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth && test_recursion && test_entscheidungs && test_halting && test_purediag; return="${?}"; } || exit 1
 
 [ "${return}" -eq 0 ] 2>/dev/null || printf "%s\n" "${return}"
