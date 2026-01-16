@@ -320,6 +320,30 @@ outn(result);
 - Sets up `paradox` to apply `diagonal` to a halting oracle itself.
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
+## Halting Problem Diagonalization (`scripts/pure_diag.slg`)
+
+```
+var loops = func(f) => {
+    if (f(loops)) {
+        loops(loops);
+    } else {
+        0;
+    }
+};
+
+outn(loops(loops));
+```
+
+**Result**: Segmentation fault (stack overflow)
+
+This implements the diagonalization argument from Turing's halting problem proof. The `loops` function receives itself as input and behaves oppositely to its own prediction:
+
+- If `loops(loops)` halts, it takes the `else` branch and returns `0`
+- If `loops(loops)` loops, it takes the `if` branch and recurses
+
+The contradiction forces infinite recursion, exhausting the call stack until the interpreter crashes. This demonstrates the halting problem's undecidability empirically through stack overflow.
+
+**Significance**: Confirms the language can express self referential constructions that prove fundamental computability limits.
 
 ## Proof of Turing Completeness
 
