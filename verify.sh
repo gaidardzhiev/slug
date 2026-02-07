@@ -106,17 +106,6 @@ test_truth() {
 	}
 }
 
-test_recursion() {
-	capture=$(./slug scripts/recursion.slg)
-	[ "${capture}" = "120" ] && {
-		fprint "Recursion" "${G}PASSED${N}";
-		return 0;
-	} || {
-		fprint "Recursion" "${R}FAILED${N}";
-		return 10;
-	}
-}
-
 test_entscheidungs() {
 	capture=$(./slug scripts/entscheidungs_problem.slg)
 	[ "${capture}" = "0" ] && {
@@ -124,7 +113,7 @@ test_entscheidungs() {
 		return 0;
 	} || {
 		fprint "EntscheidungsProblem" "${R}REFUTED${N}";
-		return 11;
+		return 10;
 	}
 }
 
@@ -135,7 +124,7 @@ test_halting() {
 		return 0;
 	} || {
 		fprint "Halting Paradox" "${R}REFUTED${N}";
-		return 	12;
+		return 	11;
 	}
 }
 
@@ -149,10 +138,10 @@ test_purediag() {
 		return 0;
 	} || {
 		fprint "Self Reference" "${R}REFUTED${N}";
-		return 	13;
+		return 	12;
 	}
 }
 
-{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth && test_recursion && test_entscheidungs && test_halting && test_purediag; return="${?}"; } || exit 1
+{ test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth && test_entscheidungs && test_halting && test_purediag; ret="${?}"; } || exit 1
 
-[ "${return}" -eq 0 ] 2>/dev/null || printf "%s\n" "${return}"
+[ "${ret}" -eq 0 ] 2>/dev/null || printf "%s\n" "${ret}"
