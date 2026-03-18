@@ -345,6 +345,38 @@ The contradiction forces infinite recursion, exhausting the call stack until the
 
 **Significance**: Confirms the language can express self referential constructions that prove fundamental computability limits.
 
+### Church Numerals (`scripts/church_numerals.slg`)
+```
+var zero  = func(f, x) => x;
+var one   = func(f, x) => f(x);
+var two   = func(f, x) => f(f(x));
+var three = func(f, x) => f(f(f(x)));
+
+var succ = func(n, f, x) => f(n(f, x));
+var add  = func(m, n, f, x) => n(f, m(f, x));
+var mul  = func(m, n, f, x) => n(func(y) => m(f, y), x);
+
+var to_int = func(n) => n(func(x) => x + 1, 0);
+
+var four  = func(f, x) => succ(three, f, x);
+var five  = func(f, x) => add(two, three, f, x);
+var six   = func(f, x) => mul(two, three, f, x);
+var seven = func(f, x) => succ(func(g, y) => add(three, three, g, y), f, x);
+
+outn(to_int(zero));
+outn(to_int(one));
+outn(to_int(four));
+outn(to_int(five));
+outn(to_int(six));
+outn(to_int(seven));
+```
+- Encodes natural numbers as pure functions where a number `n` represents applying `f` to `x` exactly `n` times.
+- Implements `succ`, `add`, and `mul` entirely through function composition, with no arithmetic operators.
+- Defines `to_int` as the only bridge to numeric values, by substituting `f` with increment and `x` with zero.
+- Demonstrates that numbers do not need to be language primitives, computation itself can encode quantity.
+
+> **Note:** The canonical Church encoding uses currying, a number is a function waiting for `f`, returning a function waiting for `x`. Slug's lack of curried function returns forces all parameters into one call, which obscures that relationship. Slug can express the computation but cannot represent the concept cleanly. **This is the direct consequence of bad language design...**
+
 ## Proof of Turing Completeness
 
 Slug language supports:
