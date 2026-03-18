@@ -321,7 +321,6 @@ outn(result);
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
 ### Halting Problem Diagonalization (`scripts/pure_diag.slg`)
-
 ```
 var loops = func(f) => {
     if (f(loops)) {
@@ -376,6 +375,29 @@ outn(to_int(seven));
 - Demonstrates that numbers do not need to be language primitives, computation itself can encode quantity.
 
 > **Note:** The canonical Church encoding uses currying, a number is a function waiting for `f`, returning a function waiting for `x`. Slug's lack of curried function returns forces all parameters into one call, which obscures that relationship. Slug can express the computation but cannot represent the concept cleanly. **This is the direct consequence of bad language design...**
+
+### Collatz Conjecture (`scripts/collatz.slg`)
+```
+var even = func(n) => n % 2 == 0;
+
+var collatz = func(n, steps) => {
+    if (n == 1) {
+        steps;
+    } else {
+        if (even(n)) {
+            collatz(n / 2, steps + 1);
+        } else {
+            collatz(n * 3 + 1, steps + 1);
+        }
+    }
+};
+
+outn(collatz(27, 0));
+```
+- Defines the Collatz sequence: halve if even, multiply by 3 and add 1 if odd, repeat until reaching 1.
+- Counts steps using the accumulator pattern, terminating only when `n` reaches 1.
+- Outputs 111, the number of steps for input 27, a deceptively large count for such a small number.
+- The conjecture is unproven: no one knows if this function halts for all inputs.
 
 ## Proof of Turing Completeness
 
