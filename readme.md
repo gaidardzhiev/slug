@@ -399,6 +399,45 @@ outn(collatz(27, 0));
 - Outputs 111, the number of steps for input 27, a deceptively large count for such a small number.
 - The conjecture is unproven: no one knows if this function halts for all inputs.
 
+### General Turing Machine Simulator (`scripts/palindrome_checker.slg`)
+```
+var tape_read  = func(right) => right % 10;
+var tape_write = func(right, s) => (right / 10) * 10 + s;
+var move_right = func(left, right) => left * 10 + right % 10;
+var move_left  = func(left, right) => right * 10 + left % 10;
+
+var get_state  = func(triple) => triple / 100;
+var get_write  = func(triple) => (triple / 10) % 10;
+var get_dir    = func(triple) => triple % 10;
+
+var run = func(transition, state, left, right) => {
+    if (state == 4) {
+        1;
+    } else {
+        if (state == 5) {
+            0;
+        } else {
+            var symbol = tape_read(right);
+            var triple = transition(state, symbol);
+            var new_state = get_state(triple);
+            var new_right = tape_write(right, get_write(triple));
+            if (get_dir(triple) == 1) {
+                run(transition, new_state, move_right(left, new_right), new_right / 10);
+            } else {
+                run(transition, new_state, left / 10, move_left(left, new_right));
+            }
+        }
+    }
+};
+```
+- Implements a general Turing machine simulator using two integers as the tape, `left` holds digits to the left of the head, `right` holds digits to the right, with the least significant digit of `right` always under the head.
+- Encodes each transition as a single integer triple `new_state * 100 + write * 10 + direction`, allowing any transition table to be expressed as a pure function passed to `run`.
+- Demonstrates that Slug's first class functions are expressive enough to separate the universal machine from the machine being simulated, `run` knows nothing about palindromes, it only knows how to step.
+- Instantiates the simulator with a palindrome checker over the alphabet `{1, 2}` with blank `3`, using 8 states to implement the classical erase and compare strategy.
+- Outputs `1` for accept and `0` for reject across six test cases covering odd length palindromes, even length palindromes, single symbols, and non palindromes.
+
+> **Note:** The tape is bounded by the size of an integer, Slug has no arbitrary precision arithmetic, so the simulator is a finite approximation of a true Turing machine. It is however philosophically complete: the architecture is correct, the separation between universal machine and transition function is genuine, and any computable function expressible within the integer tape limit can be simulated by passing a different transition function to `run`.
+
 ## Proof of Turing Completeness
 
 Slug language supports:
