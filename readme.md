@@ -459,15 +459,20 @@ demonstrate the ability to compute any computable function given enough memory a
 
 These scripts prove Slug can simulate the core logic patterns of a Turing machine, thereby being **Turing complete**.
 
-
 ## Conclusion
 
 Slug is a fully featured interpreted language with all fundamental capabilities necessary for general computation.
 
 The advanced recursion and higher order function examples prove its ability to express any computable function, fulfilling the definition of Turing completeness.
 
+A deeper pattern runs through the full script collection. The diagonalization argument in `pure_diag.slg`, the self referential paradox in `halting_paradox.slg`, the undecidability construction in `entscheidungs_problem.slg`, the diagonal substitution in `godel.slg`, and the transition function passed to itself in `palindrome_checker.slg` are all expressions of the same underlying construction, a system applying a description of itself to itself. The Church numerals in `church_numerals.slg` push this further still, demonstrating that even the concept of number is not primitive but can be dissolved entirely into the act of self application. Turing, Gödel, and Church each approached this structure from the vantage point of their own discipline, computability, formal logic, and the foundations of mathematics respectively. The scripts in this collection arrive at it from yet another: the irreducible minimum of a working interpreter.
+
+The one construction this collection cannot express is a **quine**, a program that produces its own source code as output, and whose output is itself a valid program capable of doing the same indefinitely. A quine demands precisely what Slug lacks: the ability to treat syntactic structure as a manipulable value. The diagonal mechanism is already present, as `godel.slg` demonstrates, the substitution of a formula's own numerical encoding into itself is structurally identical to what a quine must do with text. The missing primitive is the string: without string literals, concatenation, and textual output, source code cannot become data, and the reflexive loop cannot close. These three additions to the language would unlock not merely quines, but a proper computational account of Gödel's construction and the full expressive class of self referential programs, all consequent upon a single extension to the type system.
+
+The boundary of what Slug can express turns out to be precisely the boundary between numbers and text.
+
 ---
 
 ## License
 
-This project is provided under the GPL3 License.
+Copyright (C) 2025-2026 Ivan Gaydardzhiev. Licensed under GPL-3.0-only; see [COPYING](./COPYING) for details.
