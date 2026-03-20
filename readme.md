@@ -438,6 +438,59 @@ var run = func(transition, state, left, right) => {
 
 > **Note:** The tape is bounded by the size of an integer, Slug has no arbitrary precision arithmetic, so the simulator is a finite approximation of a true Turing machine. It is however philosophically complete: the architecture is correct, the separation between universal machine and transition function is genuine, and any computable function expressible within the integer tape limit can be simulated by passing a different transition function to `run`.
 
+### Gödel Numbering and Diagonalization (`scripts/godel.slg`)
+```
+var power = func(b, e) => {
+    if (e == 0) { 1; }
+    else { b * power(b, e - 1); }
+};
+
+var length = func(n) => {
+    if (n < 10) { 1; }
+    else { length(n / 10) + 1; }
+};
+
+var get_symbol = func(n, i) => {
+    (n / power(10, i)) % 10;
+};
+
+var substitute = func(f, v, pos, acc, mul) => {
+    if (pos >= length(f)) {
+        acc;
+    } else {
+        var sym = get_symbol(f, pos);
+        if (sym == 7) {
+            substitute(f, v, pos + 1, acc + v * mul, mul * power(10, length(v)));
+        } else {
+            substitute(f, v, pos + 1, acc + sym * mul, mul * 10);
+        }
+    }
+};
+
+var diagonal = func(f) => {
+    substitute(f, f, 0, 0, 1);
+};
+
+var godels_formula = 157;
+var godels_sentence = diagonal(godels_formula);
+
+outn(godels_formula);
+outn(godels_sentence);
+outn(length(godels_sentence));
+outn(get_symbol(godels_sentence, 0));
+outn(get_symbol(godels_sentence, 1));
+outn(get_symbol(godels_sentence, 2));
+outn(get_symbol(godels_sentence, 3));
+outn(get_symbol(godels_sentence, 4));
+```
+- Assigns numeric codes to logical symbols, `1` for zero, `5` for equality, `7` for variable, and encodes formulae as integers stored least significant digit first, so that each digit position corresponds to one symbol in the expression.
+- Implements `substitute` to walk a formula digit by digit, replacing every occurrence of the variable marker `7` with an arbitrary numeric value while preserving the positional encoding of all surrounding symbols.
+- Applies `diagonal` to formula `157`, encoding `var = 0`, substituting the formula's own Gödel number into itself, producing `15157`, the self referential sentence `var = 0 = 0`.
+- Decodes and prints each symbol of the resulting sentence, confirming that the original formula's number `157` is embedded within the sentence at positions 0 through 2.
+
+> **Note:** This is a positional encoding rather than the classical prime exponentiation scheme, Gödel's original construction assigns each symbol a prime and encodes sequences as products of prime powers, guaranteeing unique decodability through factorization. That encoding grows super exponentially and exceeds 32bit integer bounds for all but the shortest formulae. The positional scheme used here sacrifices that uniqueness guarantee in exchange for computational tractability, but preserves the essential mechanism: the diagonal function that produces a statement containing its own numeric description is structurally identical whether the encoding is positional or exponential. The self reference is genuine. The arithmetic is a concession to hardware.
+
+
 ## Proof of Turing Completeness
 
 Slug language supports:
