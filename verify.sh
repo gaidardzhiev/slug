@@ -142,7 +142,7 @@ test_purediag() {
 	}
 }
 
-#TODO: add verification functions for church_numerals.slg & collatz.slg & palindrome_checker.slg
+#TODO: add verification functions for church_numerals.slg & collatz.slg & palindrome_checker.slg & godel.slg
 
 { test_ackermann && test_increment && test_core_lang && test_turing && test_hof && test_recursion && test_demorgan && test_truth && test_entscheidungs && test_halting && test_purediag; ret="${?}"; } || exit 1
 
