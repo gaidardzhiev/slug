@@ -87,7 +87,7 @@ This document describes several scripts and core language features of the Slug i
 ## Core Language Features
 
 ### Arithmetic, Variables, and Conditionals (`scripts/core_language_test.slg`)
-```c
+```js
 {
     var a = 10;
     const b = 5;
@@ -139,7 +139,7 @@ This document describes several scripts and core language features of the Slug i
 
 
 ### Simple Recursion (`scripts/turing.slg`)
-```c
+```js
 var factorial = func(n) => {
     if (n == 0) {
         1;
@@ -156,7 +156,7 @@ outn(result);
 
 
 ### Anonymous Functions (`scripts/anon_func.slg`)
-```c
+```js
 var increment = func(x) => { x + 1; };
 outn(increment(7));
 ```
@@ -165,7 +165,7 @@ outn(increment(7));
 
 
 ### Advanced Recursion: Ackermann Function (`scripts/ackermann.slg`)
-```c
+```js
 var ackermann = func(m, n) => {
     if (m == 0) {
         n + 1;
@@ -187,7 +187,7 @@ outn(result);
 
 
 ### Loop Control without break (`scripts/unbounded_loop.slg`)
-```c
+```js
 var i = 0;
 var done = false;
 while (!done) {
@@ -203,7 +203,7 @@ while (!done) {
 
 
 ### Higher Order Functions and Closures (`scripts/higher_order_functions_and_closures.slg`)
-```c
+```js
 var apply = func(f, x) => {
     f(x);
 };
@@ -219,7 +219,7 @@ outn(apply(square, 5));
 
 
 ### Tail Recursive Function (`scripts/recursion.slg`)
-```c
+```js
 var fact = func(n, acc) => {
     if (n == 0) {
         acc;
@@ -235,7 +235,7 @@ outn(fact(5, 1));
 
 
 ### Truth Tables (`scripts/truth_table_testing.slg`)
-```c
+```js
 var not = func(b) => {
         if (b) { false; } else { true; }
 };
@@ -270,7 +270,7 @@ truth_table(de_morgan_1);
 
 
 ### De Morgan's Law (`scripts/demorgan_law.slg`)
-```c
+```js
 var not = func(b) => {
     if (b) { false; } else { true; }
 };
@@ -294,7 +294,7 @@ outn(de_morgan_1(false, false));
 
 
 ### Halting Paradox (`scripts/halting_paradox.slg`)
-```c
+```js
 var halts = func(prog, input) => {
     false;
 };
@@ -321,7 +321,7 @@ outn(result);
 - Outputs `0`, illustrating the contradiction proving halting problem undecidable.
 
 ### Halting Problem Diagonalization (`scripts/pure_diag.slg`)
-```c
+```js
 var loops = func(f) => {
     if (f(loops)) {
         loops(loops);
@@ -345,7 +345,7 @@ The contradiction forces infinite recursion, exhausting the call stack until the
 **Significance**: Confirms the language can express self referential constructions that prove fundamental computability limits.
 
 ### Church Numerals (`scripts/church_numerals.slg`)
-```c
+```js
 var zero  = func(f, x) => x;
 var one   = func(f, x) => f(x);
 var two   = func(f, x) => f(f(x));
@@ -377,7 +377,7 @@ outn(to_int(seven));
 > **Note:** The canonical Church encoding uses currying, a number is a function waiting for `f`, returning a function waiting for `x`. Slug's lack of curried function returns forces all parameters into one call, which obscures that relationship. Slug can express the computation but cannot represent the concept cleanly. **This is the direct consequence of bad language design...**
 
 ### Collatz Conjecture (`scripts/collatz.slg`)
-```c
+```js
 var even = func(n) => n % 2 == 0;
 
 var collatz = func(n, steps) => {
@@ -400,7 +400,7 @@ outn(collatz(27, 0));
 - The conjecture is unproven: no one knows if this function halts for all inputs.
 
 ### General Turing Machine Simulator (`scripts/palindrome_checker.slg`)
-```c
+```js
 var tape_read  = func(right) => right % 10;
 var tape_write = func(right, s) => (right / 10) * 10 + s;
 var move_right = func(left, right) => left * 10 + right % 10;
@@ -439,7 +439,7 @@ var run = func(transition, state, left, right) => {
 > **Note:** The tape is bounded by the size of an integer, Slug has no arbitrary precision arithmetic, so the simulator is a finite approximation of a true Turing machine. It is however philosophically complete: the architecture is correct, the separation between universal machine and transition function is genuine, and any computable function expressible within the integer tape limit can be simulated by passing a different transition function to `run`.
 
 ### Gödel Numbering and Diagonalization (`scripts/godel.slg`)
-```c
+```js
 var power = func(b, e) => {
     if (e == 0) { 1; }
     else { b * power(b, e - 1); }
